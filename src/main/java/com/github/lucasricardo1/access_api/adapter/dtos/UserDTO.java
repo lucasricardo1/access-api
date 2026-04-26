@@ -1,14 +1,16 @@
-package com.github.lucasricardo1.access_api.core.domain;
+package com.github.lucasricardo1.access_api.adapter.dtos;
 
 import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class User {
+public class UserDTO {
+
     private Long id;
+    private String name;
     private String email;
     private String password;
     private Boolean admin;
-    private Long personId;
+
 }
