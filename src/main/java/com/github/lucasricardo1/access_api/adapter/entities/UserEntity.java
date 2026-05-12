@@ -1,12 +1,11 @@
 package com.github.lucasricardo1.access_api.adapter.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "tb_user")
 public class UserEntity {
 
     @Id
@@ -15,4 +14,7 @@ public class UserEntity {
     private String email;
     private String password;
     private Boolean admin;
+    @OneToOne
+    @JoinColumn(name = "person_id")
+    private PersonEntity personEntity;
 }

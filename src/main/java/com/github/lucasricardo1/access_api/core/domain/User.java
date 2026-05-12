@@ -10,12 +10,6 @@ public class User {
     private String email;
     private String password;
     private Boolean admin;
-    private Long personId;
+    private Person person;
 
-    public User(Long id, String email, String password, Boolean admin) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.admin = admin;
-    }
 }

@@ -4,7 +4,6 @@ import com.github.lucasricardo1.access_api.core.domain.User;
 import com.github.lucasricardo1.access_api.core.ports.UserRepositoryPort;
 import com.github.lucasricardo1.access_api.core.ports.UserServicePort;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 public class UserService implements UserServicePort {
@@ -13,6 +12,14 @@ public class UserService implements UserServicePort {
 
     @Override
     public User createUser(User user) {
-        return userRepositoryPort.create(user);
+        try{
+            if(userRepositoryPort.findByEmail(user.getEmail()).isPresent()){
+                throw new IllegalAccessException("User already exists!");
+            }
+            return userRepositoryPort.create(user);
+        } catch (RuntimeException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
