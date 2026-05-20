@@ -1,4 +1,4 @@
-package com.github.lucasricardo1.access_api.core.domain;
+package com.github.lucasricardo1.access_api.adapter.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Visitor {
-
+public class VisitorDTO {
     private Long id;
+    private String name;
     private String documentNumber;
-    private Person person;
 }

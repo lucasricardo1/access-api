@@ -10,5 +10,5 @@ public class Resident {
     private String documentNumber;
     private String address;
     private String phoneNumber;
-    private Long personId;
+    private Person person;
 }
