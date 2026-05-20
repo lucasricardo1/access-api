@@ -1,6 +1,7 @@
 package com.github.lucasricardo1.access_api.core.services;
 
 import com.github.lucasricardo1.access_api.core.domain.Visitor;
+import com.github.lucasricardo1.access_api.core.exceptions.BusinessException;
 import com.github.lucasricardo1.access_api.core.ports.VisitorRepositoryPort;
 import com.github.lucasricardo1.access_api.core.ports.VisitorServicePort;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ public class VisitorService implements VisitorServicePort {
     public Visitor createVisitor(Visitor visitor) {
 
         if(visitorRepositoryPort.findByDocumentNumber(visitor.getDocumentNumber()).isPresent()){
-            throw new IllegalArgumentException("Visitor already exists!");
+            throw new BusinessException("Visitor already exists!");
         }
 
         return visitorRepositoryPort.create(visitor);
@@ -25,7 +26,7 @@ public class VisitorService implements VisitorServicePort {
     @Override
     public Visitor findByDocumentNumber(String documentNumber) {
         return visitorRepositoryPort.findByDocumentNumber(documentNumber)
-                .orElseThrow(() -> new IllegalArgumentException("Visitor not found"));
+                .orElseThrow(() -> new BusinessException("Visitor not found"));
     }
 
     @Override
