@@ -1,11 +1,9 @@
 package com.github.lucasricardo1.access_api.infra;
 
-import com.github.lucasricardo1.access_api.core.ports.ResidentRepositoryPort;
-import com.github.lucasricardo1.access_api.core.ports.ResidentServicePort;
-import com.github.lucasricardo1.access_api.core.ports.UserRepositoryPort;
-import com.github.lucasricardo1.access_api.core.ports.UserServicePort;
+import com.github.lucasricardo1.access_api.core.ports.*;
 import com.github.lucasricardo1.access_api.core.services.ResidentService;
 import com.github.lucasricardo1.access_api.core.services.UserService;
+import com.github.lucasricardo1.access_api.core.services.VisitorService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,5 +24,10 @@ public class BeansConfig {
     @Bean
     public ResidentServicePort residentServicePort(ResidentRepositoryPort residentRepositoryPort){
         return new ResidentService(residentRepositoryPort);
+    }
+
+    @Bean
+    public VisitorServicePort visitorServicePort(VisitorRepositoryPort visitorRepositoryPort){
+        return new VisitorService(visitorRepositoryPort);
     }
 }

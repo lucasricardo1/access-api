@@ -1,9 +1,9 @@
 package com.github.lucasricardo1.access_api.adapter.controllers;
 
-import com.github.lucasricardo1.access_api.adapter.converters.ResidentConverter;
-import com.github.lucasricardo1.access_api.adapter.dtos.ResidentDTO;
-import com.github.lucasricardo1.access_api.core.domain.Resident;
-import com.github.lucasricardo1.access_api.core.ports.ResidentServicePort;
+import com.github.lucasricardo1.access_api.adapter.converters.VisitorConverter;
+import com.github.lucasricardo1.access_api.adapter.dtos.VisitorDTO;
+import com.github.lucasricardo1.access_api.core.domain.Visitor;
+import com.github.lucasricardo1.access_api.core.ports.VisitorServicePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/visitors")
 public class VisitorController {
 
-    private final ResidentServicePort residentServicePort;
-    private final ResidentConverter residentConverter;
+    private final VisitorServicePort visitorServicePort;
+    private final VisitorConverter visitorConverter;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResidentDTO create(@RequestBody ResidentDTO residentDTO){
+    public VisitorDTO create(@RequestBody VisitorDTO visitorDTO){
 
-        Resident newResident = residentServicePort.createResident(residentConverter.toDomain(residentDTO));
-        return residentConverter.toDTO(newResident);
+        Visitor visitor = visitorServicePort.createVisitor(visitorConverter.toDomain(visitorDTO));
+        return visitorConverter.toDTO(visitor);
     }
 }
