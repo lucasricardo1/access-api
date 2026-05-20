@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -34,6 +35,11 @@ public class VisitorRepositoryAdapter implements VisitorRepositoryPort {
             return Optional.empty();
         }
         return Optional.ofNullable(modelMapper.map(entity, Visitor.class));
+    }
+
+    @Override
+    public List<Visitor> findAll() {
+        return visitorRepository.findAll().stream().map(visitorEntity -> modelMapper.map(visitorEntity, Visitor.class)).toList();
     }
 
     private PersonEntity createPerson(Person person){

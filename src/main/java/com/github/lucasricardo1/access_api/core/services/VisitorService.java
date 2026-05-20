@@ -5,6 +5,8 @@ import com.github.lucasricardo1.access_api.core.ports.VisitorRepositoryPort;
 import com.github.lucasricardo1.access_api.core.ports.VisitorServicePort;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 public class VisitorService implements VisitorServicePort {
 
@@ -18,5 +20,16 @@ public class VisitorService implements VisitorServicePort {
         }
 
         return visitorRepositoryPort.create(visitor);
+    }
+
+    @Override
+    public Visitor findByDocumentNumber(String documentNumber) {
+        return visitorRepositoryPort.findByDocumentNumber(documentNumber)
+                .orElseThrow(() -> new IllegalArgumentException("Visitor not found"));
+    }
+
+    @Override
+    public List<Visitor> findAll() {
+        return visitorRepositoryPort.findAll();
     }
 }

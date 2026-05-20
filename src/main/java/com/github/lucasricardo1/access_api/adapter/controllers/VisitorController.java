@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("api/visitors")
@@ -22,5 +25,17 @@ public class VisitorController {
 
         Visitor visitor = visitorServicePort.createVisitor(visitorConverter.toDomain(visitorDTO));
         return visitorConverter.toDTO(visitor);
+    }
+
+    @GetMapping("/{documentNumber}")
+    public VisitorDTO findByDocumentNumber(@PathVariable String documentNumber){
+        return visitorConverter.toDTO(visitorServicePort.findByDocumentNumber(documentNumber));
+    }
+
+    @GetMapping
+    public List<VisitorDTO> findAll(){
+        return visitorServicePort.findAll().stream()
+                .map(visitorConverter::toDTO)
+                .collect(Collectors.toList());
     }
 }
